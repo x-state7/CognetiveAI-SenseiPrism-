@@ -1,3 +1,5 @@
+// this is just a testing of how actually child process work it is not related to actual code.
+
 // spawn is a method used to start an external process (like a Python script).
 const spawn = require("child_process").spawn;
 
