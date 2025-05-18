@@ -1,6 +1,8 @@
 import { useForm } from "react-hook-form"
 import axios from 'axios'
 import { useState } from "react"
+// import Output from "./Output"
+import AnalysisViewer from "./AnalysisViewer"
 // import { post } from "../../server/routes/FileUpload"
 // basic example of how to use react-hook form
 // function App() {
@@ -65,7 +67,11 @@ import { useState } from "react"
 
 
 // main code starts from here
+
+
+
 function App() {
+  const [clicked, setClicked] = useState('false')
   const {
     register,
     handleSubmit,
@@ -96,58 +102,55 @@ function App() {
   }
 
   return (
-    <form
-      onSubmit={handleSubmit(onSubmit)}>
-      <div>
-        <label>Upload audio:</label>
+    <div>
+      <form
+        onSubmit={handleSubmit(onSubmit)}>
+        <div>
+          <label>Upload audio:</label>
+          <input
+            type="file"
+            accept="audio/"
+            {...register('uploadAudio',
+              {
+                required: true,
+              })
+            }></input>
+
+          <label>Upload Image:</label>
+          <input
+            type="file"
+            accept="image/"
+            {...register('uploadImage',
+              {
+                required: true,
+              })
+            }></input>
+
+          <label>Upload video:</label>
+          <input
+            type="file"
+            accept="video/"
+            {...register('uploadVideo',
+              {
+                required: true,
+              })
+            }></input>
+
+        </div>
+        <br></br>
+
+        {/* if dont want to submit until the previous submissin is performing */}
         <input
-          type="file"
-          accept="audio/"
-          {...register('uploadAudio',
-            {
-              required: true,
-            })
-          }></input>
+          className="border 1px border-solid"
+          type="submit"
+          disabled={isSubmitting}
+          value={isSubmitting ? "Submitting" : "Submit"}></input>
+        <br></br>
+      </form>
 
-        <label>Upload Image:</label>
-        <input
-          type="file"
-          accept="image/"
-          {...register('uploadImage',
-            {
-              required: true,
-            })
-          }></input>
-
-        <label>Upload video:</label>
-        <input
-          type="file"
-          accept="video/"
-          {...register('uploadVideo',
-            {
-              required: true,
-            })
-          }></input>
-
-
-        {/* <label>Textarea</label>
-        <textarea
-          {
-          ...register('pasteText')
-          }>
-        </textarea> */}
-
-      </div>
-      <br></br>
-
-      {/* if dont want to submit until the previous submissin is performing */}
-      <input
-        className="border 1px border-solid"
-        type="submit"
-        disabled={isSubmitting}
-        value={isSubmitting ? "Submitting" : "Submit"}></input>
-      <br></br>
-    </form>
+      {clicked && <AnalysisViewer></AnalysisViewer>}
+      <button onClick={() => setClicked(true)}> Analysis View </button>
+    </div>
   )
 }
 
