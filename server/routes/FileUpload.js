@@ -8,7 +8,7 @@ const { runAnalysis } = require('../controller/runAnalysis')
 
 // creating API Route
 router.post("/analyze", localFileUpload)
-router.post("/result", runAnalysis)
+router.get("/result", runAnalysis)
 // router.get("/name", callName)
 
 module.exports = router

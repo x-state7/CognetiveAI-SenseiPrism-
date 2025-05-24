@@ -1,0 +1,14 @@
+{
+  "watch": [
+    "server",
+    "routes",
+    "controller"
+  ],
+  "ignore": [
+    "output.json",
+    "*.wav",
+    "*.mp4",
+    "*.png"
+  ],
+  "ext": "js,json"
+}
