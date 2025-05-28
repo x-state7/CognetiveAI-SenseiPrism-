@@ -10,6 +10,7 @@ import sys
 from transformers import pipeline
 import subprocess
 import json
+# - feedback (personalized behavioral suggestion)
 
 
 # Create the sentiment analysis pipeline once
@@ -98,42 +99,27 @@ def analyze_file(file_path):
     return result
 
 
-# def map_topic_to_cognition(topic):
-#     mapping = {
-#         "Educational": "Promotes learning and focus",
-#         "Entertainment": "Leads to relaxation and emotional stimulation",
-#         "Politics": "Engages critical thinking, may cause cognitive bias",
-#         "Technology": "Stimulates technical curiosity and analytical thought",
-#         "Sports": "Encourages motivation and discipline",
-#         "General": "Has mixed cognitive effects"
-#     }
-#     return mapping.get(topic, "Unknown cognitive effect")
-
-# def map_emotion_to_cognition(emotion):
-#     mapping = {
-#         "joy": "Boosts mood and emotional well-being",
-#         "sadness": "May increase empathy or emotional fatigue",
-#         "anger": "Triggers stress or defensive behavior",
-#         "disgust": "Can cause aversion or distancing",
-#         "neutral": "Minimal emotional impact",
-#         "surprise": "Promotes curiosity and attention",
-#         "Unknown": "Uncertain emotional effect"
-#     }
-#     return mapping.get(emotion, "Unknown emotional effect")
-
 
 def generate_cognitive_insight(text):
     prompt = f"""
-You are an expert cognitive analyst. Given the following content text:
+You are an expert cognitive and behavioral analyst AI.
+
+Given the following content:
 
 \"\"\"{text}\"\"\"
 
-Please analyze and provide:
-- The likely cognitive effects on a person consuming this content.
-- Emotional impact.
-- A concise summary of cognitive insights.
+1. Analyze the overall emotional and cognitive effects this type of content might have on an average person.
+2. Detect whether the content is more educational, entertainment, or mixed.
+3. Identify how this media consumption could affect attention span, emotional health, or learning.
+4. Based on the analysis, write a short, personalized feedback message like:
+   "Your recent media is entertainment-heavy. This may increase dopamine craving and reduce long-term focus. Consider balancing it with educational content."
 
-Format the response as JSON with keys: cognitive_insight, emotional_impact, summary.
+Return your response in JSON format with these keys:
+- cognitive_insight
+- emotional_impact
+- summary
+- content_type (e.g., Educational, Entertainment, Mixed)
+- stimulation_level (e.g., High, Moderate, Low)
 """
 
     process = subprocess.Popen(
@@ -149,11 +135,17 @@ Format the response as JSON with keys: cognitive_insight, emotional_impact, summ
         print("Ollama error:", stderr, file=sys.stderr)
 
     try:
-        insight_json = json.loads(stdout)
-        return insight_json
+        return json.loads(stdout)
     except json.JSONDecodeError:
-        return {"cognitive_insight": stdout.strip(), "emotional_impact": "", "summary": ""}
-
+        # Return fallback structure if model replies in natural language
+        return {
+            "cognitive_insight": stdout.strip(),
+            "emotional_impact": "",
+            "summary": "",
+            "content_type": "",
+            "stimulation_level": "",
+            "feedback": "Unable to generate structured feedback. Try with clearer content."
+        }
 
 def summarize_and_map_cognition(results):
     combined_text = " ".join(r["text"] for r in results if r["text"])
