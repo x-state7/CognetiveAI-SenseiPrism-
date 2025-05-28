@@ -102,61 +102,6 @@ function App() {
     }
   }
 
-  // return (
-  //   <div>
-  //     <form
-  //       onSubmit={handleSubmit(onSubmit)}>
-  //       <div>
-  //         <label>Upload audio:</label>
-  //         <input
-  //           type="file"
-  //           accept="audio/"
-  //           {...register('uploadAudio',
-  //             {
-  //               required: true,
-  //             })
-  //           }></input>
-
-  //         <label>Upload Image:</label>
-  //         <input
-  //           type="file"
-  //           accept="image/"
-  //           {...register('uploadImage',
-  //             {
-  //               required: true,
-  //             })
-  //           }></input>
-
-  //         <label>Upload video:</label>
-  //         <input
-  //           type="file"
-  //           accept="video/"
-  //           {...register('uploadVideo',
-  //             {
-  //               required: true,
-  //             })
-  //           }></input>
-
-  //       </div>
-  //       <br></br>
-
-  //       {/* if dont want to submit until the previous submissin is performing */}
-  //       <input
-  //         className="border 1px border-solid"
-  //         type="submit"
-  //         disabled={isSubmitting}
-  //         value={isSubmitting ? "Submitting" : "Submit"}></input>
-  //       <br></br>
-  //     </form>
-
-  //     <button onClick={() => setClicked(!clicked)}>
-  //       {clicked ? "Hide Analysis" : "Show Analysis"}
-  //     </button>
-
-  //     {clicked && <AnalysisViewer></AnalysisViewer>}
-  //   </div>
-  // )
-
 
   return (
     <div className="max-w-2xl mx-auto p-8 mt-8 bg-white rounded-xl shadow-md space-y-6">
@@ -206,8 +151,8 @@ function App() {
             disabled={isSubmitting}
             value={isSubmitting ? "Submitting..." : "Submit"}
             className={`w-full py-2 px-4 rounded-md text-white font-semibold ${isSubmitting
-                ? "bg-gray-400 cursor-not-allowed"
-                : "bg-indigo-600 hover:bg-indigo-700"
+              ? "bg-gray-400 cursor-not-allowed"
+              : "bg-indigo-600 hover:bg-indigo-700"
               } transition`}
           />
         </div>
