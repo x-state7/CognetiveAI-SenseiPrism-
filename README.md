@@ -18,7 +18,7 @@
 
 ---
 
-## 🛠️ Technologies Used
+### 🛠️ Technologies Used
 
 | Layer            | Tech Stack                                                                |
 |------------------|---------------------------------------------------------------------------|
@@ -30,7 +30,7 @@
 
 ---
 
-## 📁 Folder Structure
+### 📁 Folder Structure
 
 ```bash
 SenseiPrism/
@@ -54,7 +54,7 @@ SenseiPrism/
 └── README.md                 # This file
 ```
 
-## ⚙️ Installation & Setup
+### ⚙️ Installation & Setup
 
 1. Clone the Repository
 ```bash 
@@ -101,7 +101,7 @@ npm start
 Returns: Latest analysis JSON result from the backend
 
 
-## 🧼 To Do
+### 🧼 To Do
  * Add user authentication
 
  * Add support for live screen capture
@@ -110,10 +110,11 @@ Returns: Latest analysis JSON result from the backend
 
  * Improve topic classification using ML models
 
-## 🤝 Contributors
+### 🤝 Contributors
 Hemant Kumar – Full Stack Developer & ML Engineer
 
 Mitsuha (My System) – Infra, Debugging, System Design
 
-## 📜 License
-This project is licensed under the MIT License.
+### 📜 License
+📜 License  
+This project is licensed under the [MIT License](https://opensource.org/licenses/MIT).
